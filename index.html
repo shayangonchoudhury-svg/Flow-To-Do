@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flow — Smart To-Do</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Red+Hat+Text:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Orbitron:wght@400;500;600;700;800;900&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <!-- ============================================================
+     HERO PAGE
+     ============================================================ -->
+  <section id="hero-page">
+  <div class="hero-bg"></div>
+
+  <!-- Floating scraps -->
+  <div class="hero-scrap" style="width:60px;height:80px;left:8%;--r0:-15deg;--r1:25deg;animation-duration:14s;animation-delay:0s"></div>
+  <div class="hero-scrap" style="width:40px;height:55px;left:22%;--r0:20deg;--r1:-10deg;animation-duration:18s;animation-delay:-5s"></div>
+  <div class="hero-scrap" style="width:80px;height:50px;left:60%;--r0:-8deg;--r1:18deg;animation-duration:22s;animation-delay:-9s"></div>
+  <div class="hero-scrap" style="width:35px;height:70px;left:78%;--r0:30deg;--r1:-20deg;animation-duration:16s;animation-delay:-3s"></div>
+  <div class="hero-scrap" style="width:55px;height:40px;left:45%;--r0:-25deg;--r1:12deg;animation-duration:20s;animation-delay:-12s"></div>
+  <div class="hero-scrap" style="width:28px;height:90px;left:90%;--r0:10deg;--r1:-30deg;animation-duration:25s;animation-delay:-7s"></div>
+
+  <div class="hero-content">
+    <p class="hero-overline">Your intelligent daily companion</p>
+
+    <div class="hero-title-wrap">
+      <span class="hero-title-top" data-text="FLOW">FLOW</span>
+      <span class="hero-title-sub">Smart To&#8209;Do</span>
+    </div>
+
+    <div class="hero-rule">
+      <span class="hero-rule-line"></span>
+      <span class="hero-rule-diamond"></span>
+      <span class="hero-rule-line"></span>
+    </div>
+
+    <p class="hero-tagline">"Clarity is not a destination — it's a daily practice."</p>
+
+    <div class="hero-features">
+      <div class="hero-feat">
+        <div class="hero-feat-icon"><i class="fa-solid fa-pen-nib"></i></div>
+        <span class="hero-feat-label">Notebook feel</span>
+      </div>
+      <div class="hero-feat">
+        <div class="hero-feat-icon"><i class="fa-solid fa-bolt"></i></div>
+        <span class="hero-feat-label">Priority focus</span>
+      </div>
+      <div class="hero-feat">
+        <div class="hero-feat-icon"><i class="fa-solid fa-calendar"></i></div>
+        <span class="hero-feat-label">Due dates</span>
+      </div>
+      <div class="hero-feat">
+        <div class="hero-feat-icon"><i class="fa-solid fa-floppy-disk"></i></div>
+        <span class="hero-feat-label">Auto-saves</span>
+      </div>
+    </div>
+
+    <button class="hero-cta" id="enterBtn">
+      <span>Open My Notebook</span>
+      <i class="fa-solid fa-book-open"></i>
+    </button>
+
+    <p class="hero-hint"><i class="fa-solid fa-lock-open" style="font-size:9px;margin-right:4px"></i>No sign-up needed &nbsp;·&nbsp; Works offline &nbsp;·&nbsp; Your data stays on your device</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     MAIN APP
+     ============================================================ -->
+<main id="main-app">
+  <div class="notebook">
+    <!-- Spine & rings -->
+    <div class="notebook-spine"></div>
+    <div class="notebook-rings">
+      <div class="ring"></div><div class="ring"></div>
+      <div class="ring"></div><div class="ring"></div>
+      <div class="ring"></div><div class="ring"></div>
+      <div class="ring"></div><div class="ring"></div>
+    </div>
+
+    <!-- The page -->
+    <div class="page">
+      <div class="margin-line"></div>
+      <div class="page-corner"></div>
+
+      <!-- Header -->
+      <header class="app-header">
+        <div class="brand">
+          <div class="brand-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+          <div class="brand-text">
+            <h1>FLOW</h1>
+            <p class="tagline">Daily notebook</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="sku-btn" id="searchToggle"><i class="fa-solid fa-magnifying-glass"></i></button>
+          <button class="sku-btn" id="backToHeroBtn"><i class="fa-solid fa-house"></i></button>
+        </div>
+      </header>
+
+      <!-- Search bar -->
+      <div class="search-bar-wrap" id="searchBarWrap">
+        <div class="sku-input-wrap">
+          <i class="fa-solid fa-magnifying-glass sku-input-icon"></i>
+          <input type="text" id="searchInput" class="sku-input" placeholder="Search your notes..." autocomplete="off" />
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-stamp">
+          <span class="stat-value" id="totalCount">0</span>
+          <span class="stat-label">Total</span>
+        </div>
+        <div class="stat-stamp">
+          <span class="stat-value" id="activeCount">0</span>
+          <span class="stat-label">Active</span>
+        </div>
+        <div class="stat-stamp">
+          <span class="stat-value" id="doneCount">0</span>
+          <span class="stat-label">Done</span>
+        </div>
+        <div class="stat-stamp progress-stamp">
+          <div class="ring-wrap">
+            <svg class="progress-svg" viewBox="0 0 60 60" style="width:100%;height:100%">
+              <circle class="ring-bg" cx="30" cy="30" r="26"/>
+              <circle class="ring-fg" id="ringFg" cx="30" cy="30" r="26"/>
+            </svg>
+            <div class="ring-pct" id="ringPct">0%</div>
+          </div>
+          <span class="stat-label">Progress</span>
+        </div>
+      </div>
+
+      <!-- Add form -->
+      <form class="add-form" id="addForm">
+        <div class="sku-input-wrap">
+          <i class="fa-solid fa-pen sku-input-icon"></i>
+          <input type="text" id="taskInput" class="sku-input" placeholder="Write a new task..." autocomplete="off" maxlength="140" />
+        </div>
+        <select id="prioritySelect" class="sku-select" title="Priority">
+          <option value="low">🌿 Low</option>
+          <option value="medium" selected>⚡ Med</option>
+          <option value="high">🔥 High</option>
+        </select>
+        <input type="date" id="dueDate" class="sku-input" style="flex:0 0 auto;width:auto;padding:11px 10px;" title="Due date" />
+        <button type="submit" class="add-submit-btn" aria-label="Add task">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </form>
+
+      <!-- Filters -->
+      <div class="filters">
+        <div class="filter-tabs">
+          <button class="filter-tab active" data-filter="all">All</button>
+          <button class="filter-tab" data-filter="active">Active</button>
+          <button class="filter-tab" data-filter="completed">Done</button>
+        </div>
+        <div class="filter-right">
+          <select id="sortSelect" class="sku-select" title="Sort">
+            <option value="manual">↕ Manual</option>
+            <option value="priority">🔥 Priority</option>
+            <option value="dueDate">📅 Due date</option>
+            <option value="alpha">🔤 A–Z</option>
+          </select>
+          <button class="sku-btn clear-btn" id="clearCompleted">
+            <i class="fa-solid fa-broom"></i> Clear done
+          </button>
+        </div>
+      </div>
+
+      <!-- Task list -->
+      <ul class="task-list" id="taskList"></ul>
+
+      <!-- Empty state -->
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon"><i class="fa-solid fa-feather-pointed"></i></div>
+        <h3>The page is blank</h3>
+        <p>Write your first task above and start your flow</p>
+      </div>
+
+      <!-- Footer -->
+      <footer class="page-footer">
+        <p>Drag to reorder · Double-click to edit · Saved automatically</p>
+      </footer>
+
+      <span class="page-number">01</span>
+    </div><!-- /page -->
+  </div><!-- /notebook -->
+</main>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
