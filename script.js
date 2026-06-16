@@ -4,6 +4,7 @@ let currentFilter = 'all';
 let currentSort   = 'manual';
 let searchQuery   = '';
 let draggedId     = null;
+let deferredPrompt;
 
 /* ============================================================
    DOM REFS
@@ -40,10 +41,13 @@ enterBtn.addEventListener('click', () => {
 });
 
 backBtn.addEventListener('click', () => {
+  mainApp.classList.remove('visible');
+
   heroPg.style.display = 'flex';
   heroPg.style.opacity = '0';
   heroPg.style.transform = 'scale(1.04)';
   heroPg.classList.remove('exit');
+
   requestAnimationFrame(() => {
     heroPg.style.transition = 'opacity 0.6s, transform 0.6s';
     heroPg.style.opacity = '1';
@@ -349,3 +353,34 @@ function init() {
 }
 
 init();
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("./sw.js")
+      .then(() => console.log("Service Worker Registered"))
+      .catch(err => console.error(err));
+  });
+}
+
+const installBtn = document.getElementById("installBtn");
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+
+  deferredPrompt = e;
+
+  installBtn.style.display = "flex";
+});
+
+installBtn?.addEventListener("click", async () => {
+  if (!deferredPrompt) return;
+
+  deferredPrompt.prompt();
+
+  await deferredPrompt.userChoice;
+
+  deferredPrompt = null;
+
+  installBtn.style.display = "none";
+});
